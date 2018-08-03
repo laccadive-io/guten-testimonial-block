@@ -34,3 +34,16 @@ button.add-more-testimonial {
 	color: white;
 	line-height: 1;
 }
+
+span.remove-testimonial {
+	right: 30px;
+	position: absolute;
+}
+
+textarea.editor-plain-text.content-plain-text,
+textarea.editor-plain-text.author-plain-text,
+textarea.editor-plain-text.link-plain-text {
+	background: #fafafa;
+	border: 1px solid #dadada;
+	border-radius: 5px;
+}

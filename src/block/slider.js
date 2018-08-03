@@ -61,6 +61,12 @@ registerBlockType("cgb/testimonial-slider-block", {
 					selector: ".testimonial-author-link"
 				}
 			}
+		},
+		id: {
+			type: "string",
+			source: "attribute",
+			selector: ".carousel.slide",
+			attribute: "id"
 		}
 	},
 
@@ -76,13 +82,41 @@ registerBlockType("cgb/testimonial-slider-block", {
 	// The "edit" property must be a valid function.
 	edit: function(props) {
 		const { testimonials } = props.attributes;
+		if(!props.attributes.id) {
+			const id = `testimonial${Math.floor(Math.random() * 100)}`;
+			props.setAttributes({
+				id
+			});
+		}
 		console.log("edit testimonials", testimonials);
 		const testimonialsList = testimonials
 			.sort((a, b) => a.index - b.index)
 			.map(testimonial => {
 				return (
 					<div className="wp-block-cgb-testimonial-block">
-						<p>Insert testmonial {testimonial.index - 1 + 2} here:</p>
+						<p>
+							<span>Insert testmonial {testimonial.index - 1 + 2} here:</span>
+							<span className="remove-testimonial"
+							 onClick={() => {
+
+								const newTestimonials = testimonials.filter(
+									item => item.index != testimonial.index
+								).map(t => {
+									if (t.index > testimonial.index) {
+										t.index -= 1;
+									}
+
+									return t;
+								});
+
+								props.setAttributes({
+									testimonials:newTestimonials
+								})
+							 }}
+							>
+								<i className="fa fa-times" />
+							</span>
+						</p>
 						<blockquote className="wp-block-quote">
 							{/* <label>Content:</label> */}
 							<PlainText
@@ -183,8 +217,7 @@ registerBlockType("cgb/testimonial-slider-block", {
 	save: function(props) {
 		const { testimonials } = props.attributes; // Content in our block.
 		console.log("save testimonials", testimonials);
-		const id = `testimonial${Math.floor(Math.random() * 100)}`;
-
+		const id = props.attributes.id;
 		const carouselIndicators = testimonials.map(function(testimonial, index) {
 			return (
 				<li
