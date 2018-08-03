@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Gutenberg Testimonial Block
- * Plugin URI: https://github.com/m-muhsin/guten-testimonial-block/
- * Description: Gutenberg Testimonial Block allows users to add a testimonial to the content.
+ * Plugin URI: https://github.com/laccadive-io/guten-testimonial-block/
+ * Description: Gutenberg Testimonial Block allows users to add a testimonial block or testimonial slider block to the content.
  * Author: Muhammad Muhsin
- * Author URI: http://mtwoblog.com/
+ * Author URI: https://laccadive.io/
  * Version: 1.0.0
  * License: GPL2+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
