@@ -1,0 +1,36 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+.wp-block-cgb-testimonial-block {
+	background: #fafafa;
+	border-radius: 5px;
+	border: 1px solid #cacaca;
+	// color: $black;
+	// margin: 0 auto;
+	// max-width: 740px;
+	// padding: 2rem;
+}
+
+.content-plain-text {
+	min-height: 58px !important;
+}
+
+.wp-block-quote {
+	margin-bottom: 0.5em;
+}
+
+button.add-more-testimonial {
+	height: 55px;
+	width: 55px;
+	background: #939393;
+	border-radius: 50%;
+	position: relative;
+	border: none;
+	font-size: 2em;
+	color: white;
+	line-height: 1;
+}
