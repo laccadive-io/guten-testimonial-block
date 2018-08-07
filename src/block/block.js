@@ -36,18 +36,18 @@ registerBlockType("cgb/testimonial-block", {
 	attributes: {
 		content: {
 			type: "string",
-			// source: "children",
+			source: "text",
 			selector: "span.testimonial-text"
 		},
 		author: {
 			type: "string",
-			// source: "children",
-			selector: "span.testimonial-author"
+			source: "text",
+			selector: "span.testimonial-author-text"
 		},
 		link: {
 			type: "string",
-			// source: "children",
-			selector: ".testimonial-author-link a"
+			source: "text",
+			selector: ".testimonial-author-link"
 		}
 	},
 
@@ -69,7 +69,7 @@ registerBlockType("cgb/testimonial-block", {
 					{/* <label>Content:</label> */}
 					<PlainText
 						className="content-plain-text"
-						style={{height: 58}}
+						style={{ height: 58 }}
 						placeholder="Testimonial text"
 						value={props.attributes.content}
 						onChange={content => props.setAttributes({ content: content })}
@@ -118,11 +118,14 @@ registerBlockType("cgb/testimonial-block", {
 					<div className="testimonial-author-container">
 						{author && (
 							<p className="testimonial-author-name">
-								<span className="testimonial-author">- {author}</span>
+								<span className="testimonial-author">
+									&mdash;
+									<span className="testimonial-author-text">{author}</span>
+								</span>
 							</p>
 						)}
 						{link && (
-							<p className="testimonial-author-link">
+							<p className="testimonial-author">
 								<a target="_blank" href={link}>
 									<i className="fas fa-user" />
 									<span className="testimonial-author-link">{link}</span>

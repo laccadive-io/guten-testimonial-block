@@ -41,7 +41,7 @@ registerBlockType("cgb/testimonial-slider-block", {
 			selector: "blockquote.testimonial",
 			query: {
 				index: {
-					type: "number",
+					type: "string",
 					source: "text",
 					selector: "span.testimonial-index"
 				},
@@ -82,7 +82,7 @@ registerBlockType("cgb/testimonial-slider-block", {
 	// The "edit" property must be a valid function.
 	edit: function(props) {
 		const { testimonials } = props.attributes;
-		if(!props.attributes.id) {
+		if (!props.attributes.id) {
 			const id = `testimonial${Math.floor(Math.random() * 100)}`;
 			props.setAttributes({
 				id
@@ -95,24 +95,26 @@ registerBlockType("cgb/testimonial-slider-block", {
 				return (
 					<div className="wp-block-cgb-testimonial-block">
 						<p>
-							<span>Insert testmonial {testimonial.index - 1 + 2} here:</span>
-							<span className="remove-testimonial"
-							 onClick={() => {
+							<span>
+								Insert testmonial {Number(testimonial.index) + 1} here:
+							</span>
+							<span
+								className="remove-testimonial"
+								onClick={() => {
+									const newTestimonials = testimonials
+										.filter(item => item.index != testimonial.index)
+										.map(t => {
+											if (t.index > testimonial.index) {
+												t.index -= 1;
+											}
 
-								const newTestimonials = testimonials.filter(
-									item => item.index != testimonial.index
-								).map(t => {
-									if (t.index > testimonial.index) {
-										t.index -= 1;
-									}
+											return t;
+										});
 
-									return t;
-								});
-
-								props.setAttributes({
-									testimonials:newTestimonials
-								})
-							 }}
+									props.setAttributes({
+										testimonials: newTestimonials
+									});
+								}}
 							>
 								<i className="fa fa-times" />
 							</span>
@@ -266,35 +268,39 @@ registerBlockType("cgb/testimonial-slider-block", {
 				</div>
 			);
 		});
-		return (
-			<div className="testimonial-slider">
-				<div className="carousel slide" data-ride="carousel" id={id}>
-					<ol className="carousel-indicators">{carouselIndicators}</ol>
-					<div className="carousel-inner w-75 mx-auto">{testimonialsList}</div>
-					<a
-						class="carousel-control-prev"
-						href={"#" + id}
-						role="button"
-						data-slide="prev"
-					>
-						<span class="carousel-control-prev-icon" aria-hidden="true">
-							<i className="fa fa-chevron-left" />
-						</span>
-						<span class="sr-only">Previous</span>
-					</a>
-					<a
-						class="carousel-control-next"
-						href={"#" + id}
-						role="button"
-						data-slide="next"
-					>
-						<span class="carousel-control-next-icon" aria-hidden="true">
-							<i className="fa fa-chevron-right" />
-						</span>
-						<span class="sr-only">Next</span>
-					</a>
+		if (testimonials.length > 0) {
+			return (
+				<div className="testimonial-slider">
+					<div className="carousel slide" data-ride="carousel" id={id}>
+						<ol className="carousel-indicators">{carouselIndicators}</ol>
+						<div className="carousel-inner w-75 mx-auto">
+							{testimonialsList}
+						</div>
+						<a
+							class="carousel-control-prev"
+							href={"#" + id}
+							role="button"
+							data-slide="prev"
+						>
+							<span class="carousel-control-prev-icon" aria-hidden="true">
+								<i className="fa fa-chevron-left" />
+							</span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a
+							class="carousel-control-next"
+							href={"#" + id}
+							role="button"
+							data-slide="next"
+						>
+							<span class="carousel-control-next-icon" aria-hidden="true">
+								<i className="fa fa-chevron-right" />
+							</span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
 				</div>
-			</div>
-		);
+			);
+		} else return null;
 	}
 });
