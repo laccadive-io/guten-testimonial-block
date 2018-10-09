@@ -39,7 +39,3 @@ npm run eject
 ---
 
 This project was bootstrapped with [Create Guten Block](https://github.com/ahmadawais/create-guten-block).
-
----
-
-Feel free to say hi to me on Twitter [@muhsinlk](https://twitter.com/muhsinlk/)

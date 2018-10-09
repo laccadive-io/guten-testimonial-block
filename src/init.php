@@ -29,11 +29,11 @@ function my_block_cgb_block_assets() {
 		// filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: filemtime — Gets file modification time.
 	);
 
-	wp_enqueue_style('bootstrap-style',  plugins_url( 'src/bootstrap.min.css', dirname( __FILE__ ) ));
+	wp_enqueue_style('bootstrap-style',  'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
 	wp_enqueue_style('font-awesome', 'https://use.fontawesome.com/releases/v5.1.1/css/all.css');
 
-	wp_enqueue_script('jquery',  '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js');
-	wp_enqueue_script('bootstrap-script',  plugins_url( 'src/bootstrap.min.js', dirname( __FILE__ ) ));
+	wp_enqueue_script('jquery',  'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js');
+	wp_enqueue_script('bootstrap-script',  'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js');
 } // End function my_block_cgb_block_assets().
 
 // Hook: Frontend assets.
